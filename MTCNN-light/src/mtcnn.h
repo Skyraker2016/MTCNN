@@ -151,7 +151,7 @@ public:
     FaceDetectionResult Detect(const Mat &image,std::vector<FaceInfo>&faces);
     int Release();
 private:
-    int minsize = 200;
+    int minsize = 100;
     int row=480;
     int col=640;
     Mat reImage;

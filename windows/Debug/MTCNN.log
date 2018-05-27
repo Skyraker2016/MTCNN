@@ -1,0 +1,97 @@
+﻿  main.cpp
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\google/protobuf/message_lite.h(247): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+D:\CNN\caffe\include\caffe/util/io.hpp(53): warning C4244: “参数”: 从“uint64_t”转换到“int”，可能丢失数据
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+F:\OpenGit\MRHead\mrutil.h(92): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+F:\OpenGit\MRHead\mrutil.h(93): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+..\src\main.cpp(43): warning C4305: “参数”: 从“double”到“float”截断
+..\src\main.cpp(44): warning C4305: “参数”: 从“double”到“float”截断
+..\src\main.cpp(45): warning C4305: “参数”: 从“double”到“float”截断
+..\src\main.cpp(46): warning C4305: “参数”: 从“double”到“float”截断
+..\src\main.cpp(47): warning C4305: “参数”: 从“double”到“float”截断
+..\src\main.cpp(55): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+..\src\main.cpp(170): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+..\src\main.cpp(170): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+..\src\main.cpp(177): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+..\src\main.cpp(179): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+..\src\main.cpp(188): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+..\src\main.cpp(207): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+..\src\main.cpp(129): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\time.h(505): note: 参见“localtime”的声明
+..\src\main.cpp(144): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 参见“sprintf”的声明
+..\src\main.cpp(145): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 参见“sprintf”的声明
+..\src\main.cpp(146): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 参见“sprintf”的声明
+..\src\main.cpp(148): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+..\src\main.cpp(149): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+..\src\main.cpp(151): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+..\src\main.cpp(158): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1193): note: 参见“fscanf”的声明
+..\src\main.cpp(195): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: 参见“sprintf”的声明
+..\src\main.cpp(198): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1193): note: 参见“fscanf”的声明
+..\src\main.cpp(199): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1193): note: 参见“fscanf”的声明
+..\src\main.cpp(203): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1193): note: 参见“fscanf”的声明
+..\src\main.cpp(245): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+  MTCNN.cpp
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\google/protobuf/message_lite.h(247): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+D:\CNN\caffe\include\caffe/util/io.hpp(53): warning C4244: “参数”: 从“uint64_t”转换到“int”，可能丢失数据
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/mat.hpp(1965): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/persistence.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\lenovo\.caffe\dependencies\libraries_v140_x64_py27_1.1.0\libraries\include\opencv2/core/utility.hpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+..\src\MTCNN.cpp(28): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(33): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(105): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(106): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(108): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(109): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(110): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(111): warning C4244: “=”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(158): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(159): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(175): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(176): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(177): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(178): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(242): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(252): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(253): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(254): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(255): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(257): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(258): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(365): warning C4244: “*=”: 从“double”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(370): warning C4244: “*=”: 从“double”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(381): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(382): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(404): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+..\src\MTCNN.cpp(421): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(423): warning C4305: “参数”: 从“double”到“float”截断
+..\src\MTCNN.cpp(431): warning C4305: “参数”: 从“double”到“float”截断
+..\src\MTCNN.cpp(441): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+..\src\MTCNN.cpp(445): warning C4305: “参数”: 从“double”到“float”截断
+D:\CNN\caffe\include\caffe/net.hpp(199): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+  D:\CNN\caffe\include\caffe/net.hpp(199): note: 编译类 模板 成员函数“int caffe::Net<float>::num_outputs(void) const”时
+  ..\src\MTCNN.cpp(204): note: 参见对正在编译的函数 模板 实例化“int caffe::Net<float>::num_outputs(void) const”的引用
+  ..\src\MTCNN.cpp(200): note: 参见对正在编译的类 模板 实例化“caffe::Net<float>”的引用
+D:\CNN\caffe\include\caffe/net.hpp(198): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+  D:\CNN\caffe\include\caffe/net.hpp(198): note: 编译类 模板 成员函数“int caffe::Net<float>::num_inputs(void) const”时
+  ..\src\MTCNN.cpp(203): note: 参见对正在编译的函数 模板 实例化“int caffe::Net<float>::num_inputs(void) const”的引用
+D:\CNN\caffe\include\caffe/blob.hpp(74): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+  D:\CNN\caffe\include\caffe/blob.hpp(74): note: 编译类 模板 成员函数“int caffe::Blob<float>::num_axes(void) const”时
+  D:\CNN\caffe\include\caffe/blob.hpp(140): note: 参见对正在编译的函数 模板 实例化“int caffe::Blob<float>::num_axes(void) const”的引用
+  ..\src\MTCNN.cpp(164): note: 参见对正在编译的类 模板 实例化“caffe::Blob<float>”的引用
+  正在生成代码...
+LINK : fatal error LNK1104: 无法打开文件“caffe-d.lib”

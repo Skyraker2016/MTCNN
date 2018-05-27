@@ -617,8 +617,9 @@ FaceDetectionResult mtcnn::Detect(const Mat &image, std::vector<FaceInfo> &faces
             fi.bbox.width = (*it).x2 - (*it).x1;
             fi.bbox.height = (*it).y2 -(*it).y1;
             faces.push_back(fi);
-            rectangle(image, Point((*it).y1, (*it).x1), Point((*it).y2, (*it).x2), Scalar(0,0,255), 2,8,0);
-            for(int num=0;num<5;num++)circle(image,Point((int)*(it->ppoint+num), (int)*(it->ppoint+num+5)),3,Scalar(0,255,255), -1);
+            cv::rectangle(image, Point((*it).y1, (*it).x1), Point((*it).y2, (*it).x2), Scalar(0,0,255), 2,8,0);
+            for(int num=0;num<5;num++)
+                circle(image,Point((int)*(it->ppoint+num), (int)*(it->ppoint+num+5)),3,Scalar(0,255,255), -1);
         }
     }
     firstBbox_.clear();

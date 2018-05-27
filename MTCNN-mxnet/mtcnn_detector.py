@@ -16,7 +16,7 @@ class MtcnnDetector(object):
         this is a mxnet version
     """
     def __init__(self,
-                 model_folder='../',
+                 model_folder='../model',
                  minsize = 20,
                  threshold = [0.6, 0.7, 0.7],
                  factor = 0.709,

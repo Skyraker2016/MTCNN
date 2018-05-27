@@ -66,6 +66,6 @@ def testcamera(detector):
        
 
 if __name__=="__main__":
-    detector = MtcnnDetector(model_folder='../model', ctx=mx.gpu(0), num_worker = 4 , accurate_landmark = False)
+    detector = MtcnnDetector(model_folder='../model/mxnet', ctx=mx.gpu(0), num_worker = 4 , accurate_landmark = False)
     #testimg(detector)
     testcamera(detector)

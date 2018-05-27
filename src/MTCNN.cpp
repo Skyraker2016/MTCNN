@@ -1,6 +1,6 @@
 #include "MTCNN.h"
 #include <caffe/layers/memory_data_layer.hpp>
-#define SHOW_MTCNN_DEBUG 1
+#define SHOW_MTCNN_DEBUG 0
 namespace mtcnn
 {
 	// compare score
@@ -356,7 +356,7 @@ namespace mtcnn
 		image.convertTo(sample_single, CV_32FC3);
 		cv::cvtColor(sample_single, sample_single, cv::COLOR_BGR2RGB);
 		sample_single = sample_single.t();
-
+ 
 		int height = image.rows;
 		int width = image.cols;
 		int minWH = std::min(height, width);

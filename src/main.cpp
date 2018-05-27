@@ -2,12 +2,14 @@
 #include "mrdir.h"
 #include "mropencv.h"
 #include "mrutil.h"
+#include "algorithm"
+#pragma comment( lib, cvLIB("calib3d"))
 using namespace mtcnn;
 using namespace std;
 const std::string rootdir = "../";
 const std::string imgdir = rootdir+"/imgs";
 const std::string resultdir = rootdir + "/results";
-const std::string proto_model_dir = rootdir + "/model";
+const std::string proto_model_dir = rootdir + "/model/caffe";
 
 #if _WIN32
 const string casiadir = "E:/Face/Datasets/CASIA-maxpy-clean";
@@ -16,26 +18,6 @@ const string outdir = "E:/Face/Datasets/CASIA-mtcnn";
 const string casiadir = "~\CASIA-maxpy-clean";
 const string outdir = "~\CASIA-mtcnn";
 #endif
-
-int testcamera(int cameraindex=0)
-{
-	MTCNN detector(proto_model_dir);
-	cv::VideoCapture cap(cameraindex);
-	cv::Mat frame;
-	while (cap.read(frame)){
-		std::vector<FaceInfo> faceInfo;
-		TickMeter tm;
-		tm.start();
-		detector.Detect(frame, faceInfo);
-		tm.stop();
-		cout << tm.getTimeMilli() << "ms" << endl;
-		MTCNN::drawDectionResult(frame, faceInfo);
-		cv::imshow("img", frame);
-		if ((char)cv::waitKey(1) == 'q')
-			break;
-	}
-	return 0;
-}
 
 vector<cv::Mat> Align5points(const cv::Mat &img, const std::vector<FaceInfo>&faceInfo)
 {
@@ -69,31 +51,127 @@ vector<cv::Mat> Align5points(const cv::Mat &img, const std::vector<FaceInfo>&fac
 	return dsts;
 }
 
+class PoseEstimator
+{
+public:
+    cv::Vec3d estimateHeadPose(const cv::Mat &img, const vector<Point2f > &imagePoints);
+    PoseEstimator() { init(); }
+private:
+    std::vector<cv::Point3f > modelPoints;
+    void init();
+};
+void PoseEstimator::init()
+{
+    modelPoints.push_back(Point3f(2.37427, 110.322, 21.7776));	// l eye (v 314)
+    modelPoints.push_back(Point3f(70.0602, 109.898, 20.8234));	// r eye (v 0)
+    modelPoints.push_back(Point3f(36.8301, 78.3185, 52.0345));	//nose (v 1879)
+    modelPoints.push_back(Point3f(14.8498, 51.0115, 30.2378));	// l mouth (v 1502)
+    modelPoints.push_back(Point3f(58.1825, 51.0115, 29.6224));	// r mouth (v 695)   
+}
+cv::Vec3d PoseEstimator::estimateHeadPose(const cv::Mat &img,const vector<Point2f > &imagePoints)
+{
+    cv::Vec3d eav;
+    cv::Mat op = cv::Mat(modelPoints);
+    std::vector<double> rv(3), tv(3);
+    cv::Mat rvec = cv::Mat(rv);
+    cv::Mat tvec = Mat(tv);
+    double _d[9] = { 1,0,0,0,-1,0,0,0,-1 };
+    double rot[9] = { 0 };
+    cv::Mat camMatrix = Mat(3, 3, CV_64FC1);
+    cv::Mat ip(imagePoints);
+    int max_d = (std::max)(img.rows, img.cols);
+    camMatrix = (Mat_<double>(3, 3) << max_d, 0, img.cols / 2.0,0, max_d, img.rows / 2.0,0, 0, 1.0);
+    double _dc[] = { 0,0,0,0 };
+    solvePnP(op, ip, camMatrix, Mat(1, 4, CV_64FC1, _dc), rvec, tvec, false, CV_EPNP);
+#if 1
+    cv::Mat rotM(3, 3, CV_64FC1, rot);
+    cv::Rodrigues(rvec, rotM);
+    double* _r = rotM.ptr<double>();
+    double _pm[12] = { _r[0],_r[1],_r[2],tv[0],
+        _r[3],_r[4],_r[5],tv[1],
+        _r[6],_r[7],_r[8],tv[2] };
+    Matx34d P(_pm);
+    Mat KP = camMatrix * Mat(P);
+    for (int i = 0; i < op.rows; i++) {
+        Mat_<double> X = (Mat_<double>(4, 1) << op.at<float>(i, 0), op.at<float>(i, 1), op.at<float>(i, 2), 1.0);
+        Mat_<double> opt_p = KP * X;
+        Point2f opt_p_img(opt_p(0) / opt_p(2), opt_p(1) / opt_p(2));
+        circle(img, opt_p_img, 4, Scalar(0, 0, 255), 1);
+    }
+#endif
+    for(int i=0;i<3;i++)
+        eav[i] = rvec.at<float>(0, i);
+    return eav;
+}
+
+int testcamera(int cameraindex = 0)
+{
+    PoseEstimator pe;
+    MTCNN detector(proto_model_dir);
+    cv::VideoCapture cap(cameraindex);
+    cv::Mat frame;
+    while (cap.read(frame)) {
+        std::vector<FaceInfo> faceInfo;
+        TickMeter tm;
+        tm.start();
+        detector.Detect(frame, faceInfo);
+        tm.stop();
+        //cout << tm.getTimeMilli() << "ms" << endl;
+        for (int i = 0; i < faceInfo.size(); i++)
+        {
+            vector<Point2f > imagePoints;
+            auto fi = faceInfo[0];
+            for (int i = 0; i < 5; i++)
+            {
+                imagePoints.push_back(cv::Point2f(fi.facePts.y[i], fi.facePts.x[i]));
+            }
+            auto eav=pe.estimateHeadPose(frame, imagePoints);
+            cout << eav << endl;
+        }
+        MTCNN::drawDectionResult(frame, faceInfo);
+        cv::imshow("img", frame);
+        if ((char)cv::waitKey(1) == 'q')
+            break;
+    }
+    return 0;
+}
+
 int testdir()
 {
 	MTCNN detector(proto_model_dir);
+    PoseEstimator pe;
 	vector<string>files=getAllFilesinDir(imgdir);
 	cv::Mat frame;
 
 	for (int i = 0; i < files.size(); i++)
 	{
 		string imageName = imgdir + "/" + files[i];
+        std::cout << imageName;
 		frame=cv::imread(imageName);
+        if(!frame.data)
+            continue;
 		clock_t t1 = clock();
 		std::vector<FaceInfo> faceInfo;
 		detector.Detect(frame, faceInfo);
-		std::cout << "Detect Time: " << (clock() - t1)*1.0 / 1000 << std::endl;
-		vector<Mat> alignehdfaces = Align5points(frame,faceInfo);
-		for (int j = 0; j < alignehdfaces.size(); j++)
-		{
-			string alignpath="align/"+int2string(j)+"_"+files[i];
-			imwrite(alignpath, alignehdfaces[j]);
-		}
+		std::cout << " : " << (clock() - t1)*1.0 / 1000 << std::endl;
+// 		vector<Mat> alignehdfaces = Align5points(frame,faceInfo);
+// 		for (int j = 0; j < alignehdfaces.size(); j++)
+// 		{
+// 			string alignpath="align/"+int2string(j)+"_"+files[i];
+// 			imwrite(alignpath, alignehdfaces[j]);
+// 		}
+//         vector<Point2f > imagePoints;
+//         auto fi = faceInfo[0];
+//         for (int i = 0; i < 5; i++)
+//         {
+//             imagePoints.push_back(cv::Point2f(fi.facePts.y[i], fi.facePts.x[i]));
+//         }
+//         pe.estimateHeadPose(frame, imagePoints);
 		MTCNN::drawDectionResult(frame,faceInfo);
 		cv::imshow("img", frame);
 		string resultpath = resultdir + "/"+files[i];
 		cv::imwrite(resultpath, frame);
-		cv::waitKey();
+		cv::waitKey(1);
 	}
 	return 0;
 }
@@ -272,8 +350,8 @@ int extractCASIA()
 }
 int main(int argc, char **argv)
 {
-//    testcamera();
-	testdir();
+    testcamera();
+//	testdir();
 //	testibm();
 //	eval_fddb();
 //	extractCASIA();
