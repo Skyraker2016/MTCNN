@@ -6,18 +6,19 @@ import random
 
 # video_path: input video's path, .mp4 is allow
 # output_path: the floder for imgs, picture will be named as '$output_path$/$video_name$_$index$.jpg', box information in '$output_path$/$video_name$_$index$.txt'
+# bbox_path: bbox信息文件路径
 # min_size: the bbox's min_size
 # accept_rate: only the face got the scores larger than accept_rate is accept
 # min_num: min bbox's number 
 # max_num: max bbox's number
 # accept_prob: 每个图的接受概率（用于减少重复帧）
 
-def catch_video(video_path, output_path, min_size=60, accept_rate=0.99, min_num=1, max_num=3, accept_prob=0.01, show=False):
+def catch_video(video_path, output_path, bbox_path='./meta.txt', min_size=60, accept_rate=0.99, min_num=1, max_num=3, accept_prob=0.01, show=False):
     mtcnn = MTCNN('./mtcnn.pb')
     cap=cv2.VideoCapture(video_path)
     video_name = video_path.split('/')[-1]
     index = -1
-    # f = open( output_path + 'bbox' + '.txt', 'a')
+
     while True:
         # 取帧
         index += 1
@@ -40,7 +41,7 @@ def catch_video(video_path, output_path, min_size=60, accept_rate=0.99, min_num=
         if (len(bbox) < min_num or len(bbox) > max_num):
             continue
 
-        f = open(output_path + 'bbox' + '.txt', 'a')
+        f = open(bbox_path, 'a')
 
         # 保存
         save_name = video_name + '_' + str(index)
