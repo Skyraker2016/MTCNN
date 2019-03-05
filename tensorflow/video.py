@@ -49,7 +49,7 @@ def catch_video(video_path, output_path, min_size=60, accept_rate=0.99, min_num=
         show_img = None
         for face_i, box in enumerate(bbox):
             box = box.astype('int32')
-            f.write("%s\t%d\t%d\t%d\t%d\n" % (video_path + '_'+str(index), box[1], box[0], box[3], box[2]))
+            f.write("%s\t%d\t%d\t%d\t%d\n" % (output_path + save_name, box[1], box[0], box[3], box[2]))
             show_img = cv2.rectangle(img, (box[1], box[0]), (box[3], box[2]), (255, 0, 0), 3)
             show_img = cv2.putText(img, str(face_i), (box[1], box[0]), cv2.FONT_HERSHEY_PLAIN, 2.0, (0, 0, 255), 2)
         if show:
