@@ -24,11 +24,12 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
     while True:
         # 取帧
         index += 1
-        if (begin_frame > index):
-            continue
         ret,img=cap.read()
         if not ret:
             break
+        if (begin_frame > index):
+            continue
+            
         # 随机丢帧
         if random.random() > accept_prob:
             continue
@@ -77,4 +78,4 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
         # cv2.imwrite(output_path + 'bbox_' + save_name+'.jpg', show_img)
 
 if __name__ == '__main__':
-    catch_video('ep40.mp4', './100040/', 100040)
+    catch_video('ep40.mp4', './100040/', 100040, begin_frame=6292)
