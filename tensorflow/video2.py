@@ -13,7 +13,7 @@ import random
 # max_num: max bbox's number
 # accept_prob: 每个图的接受概率（用于减少重复帧）
 
-def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_size=60, accept_rate=0.99, min_num=1, max_num=3, accept_prob=0.01, show=False):
+def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_size=60, accept_rate=0.99, min_num=1, max_num=3, accept_prob=0.01, begin_frame=0, show=False):
     mtcnn = MTCNN('./mtcnn.pb')
     cap=cv2.VideoCapture(video_path)
     video_name = str(video_id)
@@ -24,6 +24,8 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
     while True:
         # 取帧
         index += 1
+        if (begin_frame > index):
+            continue
         ret,img=cap.read()
         if not ret:
             break
