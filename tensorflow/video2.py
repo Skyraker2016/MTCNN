@@ -2,6 +2,8 @@ import argparse,cv2
 from mtcnn import MTCNN
 import os
 import random
+import time
+import math
 
 
 # video_path: input video's path, .mp4 is allow
@@ -11,11 +13,15 @@ import random
 # accept_rate: only the face got the scores larger than accept_rate is accept
 # min_num: min bbox's number 
 # max_num: max bbox's number
-# accept_prob: 每个图的接受概率（用于减少重复帧）
+# frame_gap: 提取帧间隔
 
-def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_size=60, accept_rate=0.99, min_num=1, max_num=3, accept_prob=0.01, begin_frame=0, show=False):
+def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_size=60, accept_rate=0.99, min_num=1, max_num=3, accept_prob=0.01, frame_gap=-1, begin_frame=0, show=False):
     mtcnn = MTCNN('./mtcnn.pb')
     cap=cv2.VideoCapture(video_path)
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    print("video fps:", fps)
+    if (frame_gap == -1):
+        frame_gap = round(fps)
     video_name = str(video_id)
     index = -1
     if not os.path.exists(output_path):
@@ -30,8 +36,11 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
         if (begin_frame > index):
             continue
 
-        # 随机丢帧
-        if random.random() > accept_prob:
+        # # 随机丢帧
+        # if random.random() > accept_prob:
+        #     continue
+        # 按间隔丢帧
+        if index % frame_gap != 0:
             continue
 
         # 筛选帧
@@ -49,8 +58,11 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
         f = open(bbox_path, 'a')
 
         # 保存
-        save_name = video_name + '_' + str(index)
-        print(index, ' total box:', len(bbox))
+        time_second = index / fps
+        
+
+        save_name = video_name + '_' + get_time_str(time_second)
+        print(index, get_time_str(time_second), ' total box:', len(bbox))
         tmp_img = img.copy()
         show_img = None
         for face_i, box in enumerate(bbox):
@@ -77,5 +89,18 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
             cv2.imwrite( output_path + save_name+'.jpg', tmp_img)
         # cv2.imwrite(output_path + 'bbox_' + save_name+'.jpg', show_img)
 
+
+
+def get_time_str(second):
+    int_second = math.floor(second)
+    ms = math.floor((second - int_second) * 100)
+    s = int_second % 60
+    m = int_second // 60 % 60
+    h = int_second // 3600
+    return "%02d%02d%02d%02d" % (h, m, s, ms)
+
+
+
 if __name__ == '__main__':
-    catch_video('ep40.mp4', './100040/', 100040, begin_frame=6292)
+    catch_video('ep40.mp4', './100040/', 100040)
+    # print(get_time_str(142.88))
