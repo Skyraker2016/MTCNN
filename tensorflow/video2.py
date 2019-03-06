@@ -20,7 +20,7 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
     index = -1
     if not os.path.exists(output_path):
         os.makedirs(output_path)
-
+    cv2.namedWindow('img', cv2.WINDOW_NORMAL)
     while True:
         # 取帧
         index += 1
@@ -29,7 +29,7 @@ def catch_video(video_path, output_path, video_id, bbox_path='./meta.txt', min_s
             break
         if (begin_frame > index):
             continue
-            
+
         # 随机丢帧
         if random.random() > accept_prob:
             continue
